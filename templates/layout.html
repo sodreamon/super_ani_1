@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Prompt:600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Prompt:600|Saira+Stencil+One&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/brython@3.8.8/brython.min.js"
+    ></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.10/plyr.css" />
+
+    <style>
+      /* 레이아웃 */
+      #id_nameandsearch {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        max-width: 1100px;
+        min-width: 1000px;
+        height: 43px;
+        margin: 0 auto;
+        padding: 18px 0;
+      }
+      a:link {
+        text-decoration: none;
+        color: black;
+      }
+      #id_name {
+        font-family: Saira Stencil One;
+        font-size: 72px;
+        background: -webkit-linear-gradient(#f5c501, #8e44ad, #8e44ad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 48px;
+        line-height: 76px;
+
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+      #id_searchbar {
+        display: flex;
+        width: 430px;
+        height: 30px;
+        outline: 0;
+        border-radius: 25px;
+        border: 1px solid #dfe1e5;
+        padding: 4px 4px 4px 15px;
+        font-size: 12px;
+        line-height: 17px;
+        margin-left: 30px;
+      }
+      #id_searchtext {
+        width: 90%;
+        border: none;
+      }
+      #id_searchbutton {
+        cursor: pointer;
+        right: 8px;
+        top: 1px;
+        width: 50px;
+        height: calc(100% - 2px);
+        background: #fff;
+        border-radius: 0 25px 25px 0;
+        border: 0;
+        border-left: 0;
+        color: #3366cf;
+        font-family: auto;
+      }
+      #id_layoutempty {
+        width: 25%;
+      }
+      /* 내비 */
+      .class_navis {
+        display: flex;
+        width: 100%;
+        max-width: 1100px;
+        min-width: 1000px;
+        height: 43px;
+        margin: 0 auto;
+        padding: 18px 0;
+        align-items: flex-end;
+      }
+      .class_navi {
+        padding: 16px 20px 12px;
+        color: black;
+      }
+      /* 홈 */
+      #id_days {
+        display: flex;
+        justify-content: center;
+      }
+      .class_day {
+        display: flex;
+        flex-direction: column;
+        width: 130px;
+        margin-right: 14px;
+      }
+      .class_daynav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        mix-blend-mode: screen;
+        border: 1px solid #eeeeee;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        height: 45px;
+        border-radius: 15px;
+      }
+      .class_daytext {
+        font-family: Prompt;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 30px;
+        line-height: 36px;
+
+        color: #fcfcfc;
+
+        mix-blend-mode: normal;
+
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+      .class_animes {
+        display: flex;
+        flex-direction: column;
+        width: 130px;
+      }
+
+      .class_anime {
+        position: relative;
+        width: 130px;
+        height: 213.328px;
+        margin-right: 24px;
+        margin-bottom: 3px;
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        border-radius: 10px;
+      }
+
+      @keyframes float {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.05);
+        }
+      }
+
+      .class_anime:hover {
+        animation: float 0.2s ease-in forwards;
+      }
+
+      .class_thumbnail {
+        width: 100%;
+        height: 173.328px;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+      }
+
+      .class_title {
+        font-size: 14px;
+        line-height: 16px;
+        height: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 0px 6px 3px;
+        font-family: none;
+        font-weight: 700;
+      }
+      .class_genre {
+        padding: 0 6px 3px;
+        color: #3366cf;
+        font-size: 12px;
+        line-height: 14px;
+        height: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      /* 패저네이션 */
+      .pagination-page-info {
+        padding: 0.6em;
+        padding-left: 0;
+        width: 40em;
+        margin: 0.5em;
+        margin-left: 0;
+        font-size: 12px;
+      }
+      .pagination-page-info b {
+        color: black;
+        background: #6aa6ed;
+        padding-left: 2px;
+        padding: 0.1em 0.25em;
+        font-size: 150%;
+      }
+      /* 검색 */
+
+      .class_animes_search {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 1100px;
+        margin: auto;
+      }
+      .class_anime_search {
+        position: relative;
+        width: 100%;
+        max-width: 196px;
+        margin-right: 24px;
+        margin-bottom: 24px;
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        border-radius: 10px;
+      }
+      .class_anime_search:hover {
+        animation: float 0.2s ease-in forwards;
+      }
+      .class_thumbnail_search {
+        width: 100%;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+      }
+      /* 디테일 */
+      .class_anime_info {
+        display: flex;
+        flex-direction: row;
+      }
+      .info_title {
+        width: 80px;
+      }
+      /* 전후 애니 */
+
+      .next_button:link {
+        background: #1aab8a;
+        color: #fff;
+        border: none;
+        position: relative;
+        height: 30px;
+        font-size: 1.5em;
+
+        padding: 0 2em;
+        cursor: pointer;
+        transition: 800ms ease all;
+        outline: none;
+        border-radius: 10px;
+      }
+      .next_button:hover {
+        background: #fff;
+        color: #1aab8a;
+      }
+      .next_button:before,
+      .next_button:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 2px;
+        width: 0;
+        background: #1aab8a;
+        transition: 400ms ease all;
+      }
+      .next_button:after {
+        right: inherit;
+        top: inherit;
+        left: 0;
+        bottom: 0;
+      }
+      .next_button:hover:before,
+      .next_button:hover:after {
+        width: 100%;
+        transition: 800ms ease all;
+      }
+
+      .pre_button:link {
+        background: #fa5a5a;
+        color: #fff;
+        border: none;
+        position: relative;
+        height: 30px;
+        font-size: 1.5em;
+
+        padding: 0 2em;
+        cursor: pointer;
+        transition: 800ms ease all;
+        outline: none;
+        border-radius: 10px;
+      }
+      .pre_button:hover {
+        background: #fff;
+        color: #fa5a5a;
+      }
+      .pre_button:before,
+      .pre_button:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 2px;
+        width: 0;
+        background: #fa5a5a;
+        transition: 400ms ease all;
+      }
+      .pre_button:after {
+        right: inherit;
+        top: inherit;
+        left: 0;
+        bottom: 0;
+      }
+      .pre_button:hover:before,
+      .pre_button:hover:after {
+        width: 100%;
+        transition: 800ms ease all;
+      }
+
+      .to_list:link {
+        background: #cb99c5;
+        color: #fff;
+        border: none;
+        position: relative;
+        height: 30px;
+        font-size: 1.5em;
+
+        padding: 0 2em;
+        cursor: pointer;
+        transition: 800ms ease all;
+        outline: none;
+        border-radius: 10px;
+      }
+      .to_list:hover {
+        background: #fff;
+        color: #cb99c5;
+      }
+      .to_list:before,
+      .to_list:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 2px;
+        width: 0;
+        background: #cb99c5;
+        transition: 400ms ease all;
+      }
+      .to_list:after {
+        right: inherit;
+        top: inherit;
+        left: 0;
+        bottom: 0;
+      }
+      .to_list:hover:before,
+      .to_list:hover:after {
+        width: 100%;
+        transition: 800ms ease all;
+      }
+    </style>
+
+    <title>Document</title>
+  </head>
+  <body onload="brython()">
+    <script type="text/python">
+      from browser import document
+      import datetime
+
+
+
+
+      def insert_value(event):
+        searchtext = document.select('#id_searchtext')
+        searchbutton = document.select('#id_searchbutton')
+    </script>
+    <div id="id_nameandsearch">
+      <a href="/"><h1 id="id_name">ANI TIME</h1></a>
+      <form id="id_searchbar" method="POST" action="http://localhost:5000/word">
+        <input
+          name="name_search"
+          placeholder="애니는 출구가 아닙니다 인생입니다."
+          id="id_searchtext"
+          type="text"
+          value
+        />
+        <input id="id_searchbutton" type="submit" value="검색" />
+      </form>
+      <div id="id_layoutempty"></div>
+    </div>
+    <!-- 내비 -->
+    <div>
+      <div class="class_navis">
+        <!-- <a href="/" class="class_navi">홈</a> -->
+        <!-- <a href="/new" class="class_navi">신작 TOP 20</a>
+        <a href="/genre" class="class_navi">장르 TOP 20</a>
+        <a href="/quarter" class="class_navi">분기 TOP 20</a>
+        <a href="/year" class="class_navi">올해 TOP 20</a>
+        <a href="/finished" class="class_navi">완결</a> -->
+        <a
+          style="margin-left: 100px; background-color: black; color: white; width: 300px; height: 70px;;"
+          ><span>이번 주<br />아이패드 추첨듕<br />👏👏👏</span></a
+        >
+      </div>
+    </div>
+
+    <!-- 내비끝 -->
+    <!-- 본문 -->
+    {% block content %}{%endblock%}
+    <script src="https://cdn.plyr.io/3.5.10/plyr.polyfilled.js"></script>
+    <script>
+      const player = new Plyr("#player");
+    </script>
+  </body>
+</html>

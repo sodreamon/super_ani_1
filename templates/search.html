@@ -1,0 +1,35 @@
+{%extends 'layout.html'%} {%block content%}
+
+<!-- 메인 -->
+<div
+  style="width: 100%;
+max-width: 1100px;
+min-width: 1000px;
+height: 43px;
+margin: 0 auto;
+padding: 18px 0;"
+>
+  <span>'{{word}}' 검색결과</span>
+  <br />
+  <span>{{count}}개의 검색결과</span>
+</div>
+
+<div class="class_animes_search">
+  {% for anime in animes %}
+  <a
+    href="{{url_for('detail', anime_id=anime['anime_id'])}}"
+    class="class_anime_search"
+  >
+    <img
+      class="class_thumbnail_search"
+      src="{{anime['anime_block_thumbnail']}}"
+      alt="{{anime['anime_block_subject']}}"
+    />
+    <div class="class_title">{{anime['anime_block_subject']}}</div>
+    <div class="class_genre">{{anime['anime_block_genre']}}</div>
+  </a>
+  {% endfor %}
+</div>
+
+<!-- 메인 끝 -->
+{%endblock%}

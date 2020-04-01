@@ -1,0 +1,103 @@
+{%extends 'layout.html'%} {%block content%}
+
+<!-- 메인 -->
+{%for data in anime_data%}
+<div>
+  <span>{{data['anime_block_subject']}}</span>
+</div>
+<!-- inner 데이타 -->
+<div style="display: flex;">
+  <div class="data_left">
+    <img src="{{data['anime_data_image']}}" />
+  </div>
+  <div class="data_right">
+    <div>
+      <span>평점</span>
+      <span>{{data['anime_data_rating']}}/5.0</span>
+    </div>
+    <div>
+      <div style="display: flex; flex-direction: column;">
+        <div class="class_anime_info">
+          <div class="info_title">원제</div>
+          <div>{{data['anime_data_original']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">원작</div>
+          <div>{{data['anime_data_original_story']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">감독</div>
+          <div>{{data['anime_data_director']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">각본</div>
+          <div>{{data['anime_data_script']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">디자인</div>
+          <div>{{data['anime_data_design']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">음악</div>
+          <div>{{data['anime_data_music']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">제작사</div>
+          <div>{{data['anime_data_production_company']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">장르</div>
+          <div>{{data['anime_data_genre']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">분류</div>
+          <div>{{data['anime_data_class']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">제작국가</div>
+          <div>{{data['anime_data_country']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">방영일</div>
+          <div>{{data['anime_data_date']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">등급</div>
+          <div>{{data['anime_data_age']}}</div>
+        </div>
+        <div class="class_anime_info">
+          <div class="info_title">총회</div>
+          <div>{{data['anime_data_total_count']}}</div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </div>
+</div>
+<!-- inner 데이타 끝 -->
+{%endfor%}
+<div>
+  {%for anime_list_data in anime_list%} {%for anime in anime_list_data%}
+  <a
+    href="#"
+    onclick="window.open('{{url_for('anime_link', anime_number=anime['anime_one_id'])}}');
+  "
+  >
+    <div style="display: flex; flex-direction: column;">
+      <div style="display: flex;">
+        <img
+          src="{{anime['anime_one_thumbnail']}}"
+          style="width: 167px; height: 110px;"
+        />
+        <div style="display: flex; flex-direction:column">
+          <span>{{anime['anime_one_title']}}</span>
+          <span>{{anime['anime_one_updated_date']}}</span>
+        </div>
+      </div>
+    </div>
+  </a>
+  {%endfor%} {%endfor%}
+</div>
+
+<!-- 메인끝 -->
+{%endblock%}

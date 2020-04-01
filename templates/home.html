@@ -1,0 +1,110 @@
+{%extends 'layout.html'%} {%block content%}
+
+<div id="id_days">
+  <!-- 월 -->
+  <div class="class_day" id="id_mon">
+    <div class="class_daynav" id="id_monday" style="background-color: #C0392B;">
+      <span class="class_daytext">MON</span>
+    </div>
+    <div class="class_animes">
+      {% for anime in mon %}
+      <a href="{{url_for('detail', anime_id=anime['id'])}}" class="class_anime">
+        <img class="class_thumbnail" src="{{anime['thumbnail']}}" />
+        <div class="class_title">{{anime['title']}}</div>
+        <div class="class_genre">{{anime['genre']}}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- 화 -->
+  <div class="class_day" id="id_tue">
+    <div class="class_daynav" id="id_tueday" style="background-color: #D35400;">
+      <span class="class_daytext">TUE</span>
+    </div>
+    <div class="class_animes">
+      {% for anime in tue %}
+      <a href="{{url_for('detail', anime_id=anime['id'])}}" class="class_anime">
+        <img class="class_thumbnail" src="{{anime['thumbnail']}}" />
+        <div class="class_title">{{anime['title']}}</div>
+        <div class="class_genre">{{anime['genre']}}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- 수 -->
+  <div class="class_day" id="id_wed">
+    <div class="class_daynav" id="id_wedday" style="background-color: #F1C40F;">
+      <span class="class_daytext">WED</span>
+    </div>
+    <div class="class_animes">
+      {% for anime in wed %}
+      <a href="{{url_for('detail', anime_id=anime['id'])}}" class="class_anime">
+        <img class="class_thumbnail" src="{{anime['thumbnail']}}" />
+        <div class="class_title">{{anime['title']}}</div>
+        <div class="class_genre">{{anime['genre']}}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- 목 -->
+  <div class="class_day" id="id_thu">
+    <div class="class_daynav" id="id_thuday" style="background-color: #27AE60;">
+      <span class="class_daytext">THU</span>
+    </div>
+    <div class="class_animes">
+      {% for anime in thu %}
+      <a href="{{url_for('detail', anime_id=anime['id'])}}" class="class_anime">
+        <img class="class_thumbnail" src="{{anime['thumbnail']}}" />
+        <div class="class_title">{{anime['title']}}</div>
+        <div class="class_genre">{{anime['genre']}}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- 금 -->
+  <div class="class_day" id="id_fri">
+    <div class="class_daynav" id="id_friday" style="background-color: #2980B9;">
+      <span class="class_daytext">FRI</span>
+    </div>
+    <div class="class_animes">
+      {% for anime in fri %}
+      <a href="{{url_for('detail', anime_id=anime['id'])}}" class="class_anime">
+        <img class="class_thumbnail" src="{{anime['thumbnail']}}" />
+        <div class="class_title">{{anime['title']}}</div>
+        <div class="class_genre">{{anime['genre']}}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- 토 -->
+  <div class="class_day" id="id_sat">
+    <div class="class_daynav" id="id_satday" style="background-color: #34495E;">
+      <span class="class_daytext">SAT</span>
+    </div>
+    <div class="class_animes">
+      {% for anime in sat %}
+      <a href="{{url_for('detail', anime_id=anime['id'])}}" class="class_anime">
+        <img class="class_thumbnail" src="{{anime['thumbnail']}}" />
+        <div class="class_title">{{anime['title']}}</div>
+        <div class="class_genre">{{anime['genre']}}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- 일 -->
+  <div class="class_day" id="id_sun">
+    <div class="class_daynav" id="id_sunday" style="background-color: #8E44AD;">
+      <span class="class_daytext">SUN</span>
+    </div>
+    <div class="class_animes">
+      {% for anime in sun %}
+      <a href="{{url_for('detail', anime_id=anime['id'])}}" class="class_anime">
+        <img class="class_thumbnail" src="{{anime['thumbnail']}}" />
+        <div class="class_title">{{anime['title']}}</div>
+        <div class="class_genre">{{anime['genre']}}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{%endblock%}

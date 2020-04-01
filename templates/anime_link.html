@@ -1,0 +1,51 @@
+{%extends 'layout.html'%} {%block content%}
+
+<!-- 메인 -->
+{%for anime in animes_video_data%}
+<div style="max-width: 1100px; width: 100%; margin: auto;">
+  <div
+    style="display: flex; max-width: 1100px; width: 100%; margin: auto; justify-content: stretch;"
+  >
+    <h1>{{anime['anime_one_title']}}</h1>
+  </div>
+  <div style="display: flex; max-width: 1100px; width: 100%; margin: auto;">
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div style="width: 800px;">
+        <video id="player" playsinline controls>
+          <source src="{{anime['anime_view_link']}}" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </div>
+  <div
+    style="display: flex;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    justify-content: flex-start;
+    margin-top: 10px;"
+  >
+    <a
+      class="next_button"
+      href="{{url_for('anime_link', anime_number=next_anime['anime_one_id'])}}"
+      style=""
+      >다음화</a
+    >
+
+    <a
+      class="pre_button"
+      href="{{url_for('anime_link', anime_number=pre_anime['anime_one_id'])}}"
+      style="margin-left: 10px;"
+      >이전화</a
+    >
+    <a
+      class="to_list"
+      href="{{url_for('detail', anime_id=anime_big_number)}}"
+      style="margin-left: 10px;"
+      >목록</a
+    >
+  </div>
+</div>
+{%endfor%}
+<!-- 메인 끝 -->
+{%endblock%}
